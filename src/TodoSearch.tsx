@@ -3,7 +3,7 @@ import './TodoSearch.css';
 
 function TodoSearch(){
     return(
-        <input placeholder="cebolla" />
+        <input className="TodoSearch" placeholder="cebolla" />
     );
 }
 
