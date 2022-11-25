@@ -15,6 +15,7 @@ const todos=[
 function App() {
   return (
     <React.Fragment>
+
         <TodoCounter />
         <TodoSearch />
         <TodoList>
