@@ -15,16 +15,22 @@ const todos=[
 function App() {
   return (
     <React.Fragment>
-
-        <TodoCounter />
-        <TodoSearch />
-        <TodoList>
-            {todos.map(todo => (
-                <TodoItem key={todo.text} text={todo.text}/>
-            ))}
-        </TodoList>
-
-        <CreateTodoButton />
+        <div className="leftWrapper">
+            <TodoSearch />
+            <CreateTodoButton />
+        </div>
+        <div className="rightWrapper">
+            <TodoCounter />
+            <TodoList>
+                {todos.map(todo => (
+                    <TodoItem
+                        key={todo.text}
+                        text={todo.text}
+                        completed={todo.completed}
+                    />
+                ))}
+            </TodoList>
+        </div>
     </React.Fragment>
   );
 }

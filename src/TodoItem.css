@@ -11,7 +11,7 @@
 .TodoItem-p {
     margin: 24px 0 24px 24px;
     width: calc(100% - 120px);
-    font-size: 18px;
+    font-size: 40px;
     line-height: 24px;
     font-weight: 400;
 }
