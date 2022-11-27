@@ -6,33 +6,45 @@ import { TodoSearch } from './TodoSearch';
 import { CreateTodoButton } from './CreateTodoButton';
 //import './App.css';
 
-const todos=[
+const defaultTodos=[
   {text: 'cortar cebolla', completed: false},
   {text: 'cortar morron', completed: false},
   {text: 'cortar ajo', completed: false},
 ];
 
 function App() {
-  return (
-    <React.Fragment>
-        <div className="leftWrapper">
-            <TodoSearch />
-            <CreateTodoButton />
-        </div>
-        <div className="rightWrapper">
-            <TodoCounter />
-            <TodoList>
-                {todos.map(todo => (
-                    <TodoItem
-                        key={todo.text}
-                        text={todo.text}
-                        completed={todo.completed}
-                    />
-                ))}
-            </TodoList>
-        </div>
-    </React.Fragment>
-  );
+    const [todos, setTodos] = React.useState(defaultTodos);
+    const [searchValue, setSearchValue] = React.useState('');
+
+    const completedTodos = todos.filter(todo => !!todo.completed).length;
+    const totalTodos = todos.length;
+
+    return (
+        <React.Fragment>
+            <div className="leftWrapper">
+                <TodoSearch
+                    searchValue = {searchValue}
+                    setSearchValue = {setSearchValue}
+                />
+                <CreateTodoButton />
+            </div>
+            <div className="rightWrapper">
+                <TodoCounter
+                    total={totalTodos}
+                    completed={completedTodos}
+                />
+                <TodoList>
+                    {todos.map(todo => (
+                        <TodoItem
+                            key={todo.text}
+                            text={todo.text}
+                            completed={todo.completed}
+                        />
+                    ))}
+                </TodoList>
+            </div>
+        </React.Fragment>
+    );
 }
 
 export default App;
