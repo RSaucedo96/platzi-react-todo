@@ -10,8 +10,19 @@ const defaultTodos=[
 ];
 
 function App() {
+    const localStorageTodos = localStorage.getItem('TODOS_V1')
+    let parsedTodos;
+
+    if (!localStorageTodos) {
+        localStorage.setItem('TODOS_V1',JSON.stringify([]));
+        parsedTodos = [];
+    }else{
+        parsedTodos = JSON.parse(localStorageTodos);
+    }
+
+
     //array de TODOs
-    const [todos, setTodos] = React.useState(defaultTodos);
+    const [todos, setTodos] = React.useState(parsedTodos);
     const [searchValue, setSearchValue] = React.useState('');
 
     //TODOs completos
@@ -30,12 +41,18 @@ function App() {
         });
     }
 
+    const saveTodos = (newTodos) => {
+        const stringifiedTodos = JSON.stringify(newTodos);
+        localStorage.setItem('TODOS_V1',stringifiedTodos);
+        setTodos(newTodos);
+    };
+
     //marcamos la propiedad completed como true y actualizamos
     const completeTodo = (text) => {
         const todoIndex = todos.findIndex(todo => todo.text === text);
         const newTodos = [...todos];
         newTodos[todoIndex].completed = true;
-        setTodos(newTodos);
+        saveTodos(newTodos);
     };
 
     const deleteTodo = (text) => {
