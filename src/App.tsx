@@ -10,6 +10,7 @@ import {EmptyTodos} from "./components/EmptyTodos";
 import {CreateTodoButton} from './components/CreateTodoButton';
 import {Modal} from "./components/Modal";
 import {TodoForm} from "./components/TodoForm";
+import {ChangeAlertWithStorageListener} from "./components/ChangeAlert";
 
 function App() {
     const {
@@ -25,6 +26,7 @@ function App() {
         completedTodos,
         searchValue,
         setSearchValue,
+        sincronizeTodos,
     } = useTodos();
 
     return (
@@ -33,6 +35,7 @@ function App() {
                 <TodoSearch
                     searchValue={searchValue}
                     setSearchValue={setSearchValue}
+                    loading={loading}
                 />
                 {!!openModal && (
                     <Modal>
@@ -45,6 +48,9 @@ function App() {
 
                 <CreateTodoButton
                     setOpenModal={setOpenModal}
+                />
+                <ChangeAlertWithStorageListener
+                    sincronize={sincronizeTodos}
                 />
             </div>
             <div className="rightWrapper">
@@ -64,7 +70,7 @@ function App() {
                     onEmptySearchResults={
                         (searchText) => <p>no hay resultados para {searchText}</p>
                     }
-                    {todo => (
+                    render={todo => (
                         <TodoItem
                             key={todo.text}
                             text={todo.text}

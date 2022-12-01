@@ -8,7 +8,7 @@ function TodoList(props){
             {props.loading && props.onLoading()}
             {(!props.loading && !props.totalTodos) && props.onEmptyTodos()}
             {(!!props.totalTodos && !props.searchedTodos.lenght) && props.onEmptySearchResults(props.searchText)}
-            {props.searchedTodos.map(props.children)}
+            {props.searchedTodos.map(props.render)}
             <ul>
                 {props.children}
             </ul>
